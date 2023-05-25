@@ -5,8 +5,6 @@ import {UserContext} from "../UserContext";
 export default function Header() {
   const {setUserInfo,userInfo} = useContext(UserContext);
   useEffect(() => {
-    console.log(Object.keys(sessionStorage));
-  
     fetch(`${process.env.REACT_APP_URI}/profile`, { 
       method: 'GET',
       credentials: 'include',
