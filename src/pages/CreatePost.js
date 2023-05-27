@@ -23,6 +23,9 @@ export default function CreatePost() {
       method: 'POST',
       body: data,
       credentials: 'include',
+      headers: {
+        'x-access-token': localStorage.token
+      }
     });
     if (response.ok) {
       setRedirect(true);

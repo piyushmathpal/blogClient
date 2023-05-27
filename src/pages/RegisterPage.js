@@ -18,6 +18,7 @@ export default function RegisterPage() {
     if (response.status === 200) {
       alert('registration successful');
       response.json().then(userInfo => {
+        localStorage.token = userInfo.token
         setUserInfo(userInfo);
         setRedirect(true);
       });

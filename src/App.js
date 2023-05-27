@@ -10,7 +10,7 @@ import PostPage from "./pages/PostPage";
 import EditPost from "./pages/EditPost";
 
 function App() {
-  console.log(process.env.REACT_APP_URI);
+  // console.log(process.env.REACT_APP_URI);
   return (
     <UserContextProvider>
       <Routes>

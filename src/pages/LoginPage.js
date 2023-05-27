@@ -3,7 +3,7 @@ import {Navigate} from "react-router-dom";
 import {UserContext} from "../UserContext";
 
 const LoginPage = () => {
-  console.log(process.env.REACT_APP_URI);
+  // console.log(process.env.REACT_APP_URI);
 
   const [username,setUsername] = useState('');
   const [password,setPassword] = useState('');
@@ -20,6 +20,7 @@ const LoginPage = () => {
     });
     if (response.ok) {
       response.json().then(userInfo => {
+        localStorage.token = userInfo.token
         setUserInfo(userInfo);
         setRedirect(true);
       });

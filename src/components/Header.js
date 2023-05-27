@@ -1,25 +1,32 @@
-import {Link} from "react-router-dom";
-import {useContext, useEffect} from "react";
-import {UserContext} from "../UserContext";
+import { Link } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { UserContext } from "../UserContext";
 
 export default function Header() {
-  const {setUserInfo,userInfo} = useContext(UserContext);
+  const { setUserInfo, userInfo } = useContext(UserContext);
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_URI}/profile`, { 
-      method: 'GET',
-      credentials: 'include',
-    }).then(response => 
-      response.json()).then(userInfo => {
+    fetch(`${process.env.REACT_APP_URI}/profile`, {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        'x-access-token': localStorage.token
+      }
+    })
+      .then((response) => response.json())
+      .then((userInfo) => {
         setUserInfo(userInfo);
+      }).catch(err => {
+        console.log(err)
+        setUserInfo(null)
       });
-   
   }, []);
 
   function logout() {
     fetch(`${process.env.REACT_APP_URI}/logout`, {
-      credentials: 'include',
-      method: 'POST',
+      credentials: "include",
+      method: "POST",
     });
+    localStorage.removeItem("token");
     setUserInfo(null);
   }
 
@@ -27,7 +34,9 @@ export default function Header() {
 
   return (
     <header>
-      <Link to="/" className="logo">MyBlog</Link>
+      <Link to="/" className="logo">
+        MyBlog
+      </Link>
       <nav>
         {username && (
           <>
